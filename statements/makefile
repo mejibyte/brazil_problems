@@ -2,15 +2,10 @@
 
 all: pdf ps
 
-pdf: practice.pdf problems.pdf 
-ps:  practice.ps  problems.ps  
+pdf: problems.pdf 
+ps:  problems.ps  
 
-practicepics := $(patsubst %.mp,%.1,$(wildcard pics/[xyz]*.mp))
 problemspics := $(patsubst %.mp,%.1,$(wildcard pics/[^xyz]*.mp))
-
-practice.dvi: practice.tex olymp.sty $(practicepics) texts/[xyz]*.tex
-	latex practice.tex
-	latex practice.tex
 
 problems.dvi: problems.tex olymp.sty $(problemspics) texts/[^xyz]*.tex
 	latex problems.tex
