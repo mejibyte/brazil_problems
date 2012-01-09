@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=latex 2011.7.3)  8 JAN 2012 23:17
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=latex 2011.7.3)  9 JAN 2012 13:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -434,14 +434,16 @@ LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10.95> not available
 
 ] [2]) (./texts/secret.tex [3
 
-]) (./problems.aux) ) 
+]) (./texts/stones.tex [4
+
+] [5]) (./problems.aux) ) 
 Here is how much of TeX's memory you used:
- 2304 strings out of 493634
- 27522 string characters out of 3143401
+ 2307 strings out of 493634
+ 27562 string characters out of 3143401
  84630 words of memory out of 3000000
  5570 multiletter control sequences out of 15000+200000
  10271 words of font info for 39 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 34i,9n,26p,338b,250s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 34i,9n,26p,766b,251s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on problems.dvi (3 pages, 8636 bytes).
+Output written on problems.dvi (5 pages, 13596 bytes).
