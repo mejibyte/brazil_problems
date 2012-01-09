@@ -1,0 +1,67 @@
+\begin{problem}{Central Element}{standard input}{standard output}{2 seconds}
+
+% Author: Mikhail Dvorkin, mikhail.dvorkin@gmail.com
+
+This is an interactive problem.
+
+There is a permutation $P$ of numbers 1 through $n$, not known to you,
+$P = \langle P_1, P_2, ..., P_n\rangle$.
+You can ask the following type of questions:
+Given three distinct positions $i$, $j$ and $k$, which of $P_i$, $P_j$ and $P_k$ 
+is central? Element is central if it is neither minimal nor maximal.
+
+For example, if the permutation is $\langle2, 1, 4, 3\rangle$, and you ask about positions 1, 2, and 3,
+you receive 2, because 2 is the central element of the set $\{P_1, P_2, P_3\} = \{2, 1, 4\}$. 
+Note that you don't get the information at which position among 1, 2, and 3 it is located.
+
+Your task is to find the permutation $P$. Actually, for each permutation $P$
+there is a set $S(P)$ of permutations that cannot be distinguished from $P$ using the allowed questions.
+You must find any permutation from this set.
+
+\Interaction
+
+First, your program must read from the standard input one line with the integer $n$, the size of the permutation.
+
+The program must write to the standard output one line with three positions that you ask a question about
+and wait for a line in the standard input with a response, then write next question and read next 
+response, and so on until you know the permutation $P$ up to $S(P)$.
+
+Once you know the answer, output one line with the word ``\t{OK}'' and the permutation $P$.
+
+\InputFile
+
+The first line of the standard input contains $n$, the size of the permutation ($3 \le n \le 200$).
+
+Each of the next lines of the standard input contains response to your question --- the number
+that is central among the numbers at the asked positions.
+
+\OutputFile
+
+When you're asking questions, each line of the standard output should contain three different integers
+from the range of 1 to $n$, space-separated. You can ask at most $2\,000$ questions.
+
+When you're stating the answer, the line of the standard output should contain
+the word ``\t{OK}'', and the numbers $P_1, P_2, \ldots, P_n$, all space-separated.
+After printing this line your program must exit.
+
+You must flush standard output after printing each line.
+
+\Example
+
+\begin{example}
+\exmp{
+4
+2
+3
+2
+3
+}{
+1 2 3
+2 3 4
+1 2 4
+1 3 4
+OK 2 1 4 3
+}%
+\end{example}
+
+\end{problem}

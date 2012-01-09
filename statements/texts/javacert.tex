@@ -1,0 +1,83 @@
+\begin{problem}{Java Certification}{javacert.in}{javacert.out}{2 seconds}
+
+% Author: Dmitry Paraschenko & Denis Kouznetsov, Text: Roman Elizarov
+
+You have just completed Java Certification exam that contained $n$ questions.
+You have a score card that explains your performance. The example of the scorecard
+is given below.
+\begin{center}
+You have correctly answered 78 questions out of 87. 
+
+\begin{tabular}{|l|l|}
+\hline
+Basic Concepts         & 100\%  \\ % 15 of 15 (0 wrong)
+Declarations           & 100\%  \\ % 14 of 14 (0 wrong)
+Expressions            &  83\%  \\ % 10 of 12 (2 wrong)
+Classes and Interfaces &  92\%  \\ % 11 of 12 (1 wrong)
+Multithreading         &  75\%  \\ % 15 of 20 (5 wrong)
+Collections            &  93\%  \\ % 13 of 14 (1 wrong)
+\hline
+\end{tabular}
+\end{center}
+
+From this scorecard you can infer that the questions are broken down into $m$ categories
+(in the above example $m = 6$). Each category contains $n_i$ questions ($1 \le n_i \le n$), 
+so that $\sum_{1 \le i \le m} n_i = n$. You know that you have correctly answered 
+$k$ questions out of $n$ (in the above example $k = 78$ and $n = 87$), 
+so you can easily find the number of incorrect answers $w = n - k$
+(in the above example $w = 9$). 
+
+You do remember several questions that you were unsure about and you can guess what category
+they belong to. To figure out if your answers on those questions were right or wrong,
+you really want to know how many incorrect answers you have given in each category. 
+
+Let $w_i$ ($0 \le w_i \le n_i$) be the number of \emph{incorrect} answers in $i$-th category, $\sum_{1 \le i \le m} w_i = w$.
+From the scorecard you know the \emph{percentage of correct answers} in each category.
+That is, for each $i$ from $1$ to $m$ you know the value of $100(n_i - w_i) / n_i$
+rounded to the nearest integer. The value with a fractional part of $0.5$ is 
+rounded to the nearest even integer.
+
+It may not be possible to uniquely find the valid values for $w_i$. However, you
+guess that the questions are broken down into categories in a mostly uniform manner. 
+You have to find the valid values of $w_i$ and $n_i$, so that to minimize the difference 
+between the maximum value of $n_i$ and the minimum value of $n_i$. If there are still 
+multiple possible values for $w_i$ and $n_i$, then find any of them.
+
+\InputFile
+
+The first line of the input file contains three integer numbers --- $k$, $n$, and $m$,
+where $k$ ($0 \le k \le n$) is the number of correctly answered questions, 
+$n$ ($1 \le n \le 100$) is the total number of questions, $m$ ($1 \le m \le 10$) 
+is the number of question categories. The following $m$ lines of the input file 
+contain one integer number from $0$ to $100$ (inclusive) on a line --- 
+percentages of the number of the correct answers in each category.
+The input file always corresponds to some valid set of $w_i$ and $n_i$.
+
+\OutputFile
+
+Write to the output file $m$ lines with two integer numbers $w_i$ and $n_i$ on a line,
+separated by a space --- the number of incorrect answers and the total number of questions
+in each category, satisfying constraints as given in the problem statement. 
+
+\Example
+
+\begin{example}
+\exmp{
+78 87 6
+100
+100
+83
+92
+75
+93
+}{
+0 13
+0 13
+3 18
+1 13
+4 16
+1 14
+}%
+\end{example}
+
+\end{problem}

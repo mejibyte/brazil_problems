@@ -1,0 +1,70 @@
+\begin{problem}{K-equivalence}{kequiv.in}{kequiv.out}{2 seconds}
+
+% Author: Mikhail Dvorkin, mikhail.dvorkin@gmail.com
+
+Consider a set $K$ of positive integers.
+
+Let $p$ and $q$ be two non-zero decimal digits. Call them $K$-equivalent
+if the following condition applies:
+
+\begin{quote}
+For every $n \in K$, if you replace one digit $p$ with $q$ or one digit $q$ with
+$p$ in the decimal notation of $n$ then the resulting number will be
+an element of $K$.
+\end{quote}
+
+For example, when $K$ is the set of integers divisible by $3$, the digits
+$1$, $4$, and $7$ are $K$-equivalent. Indeed, replacing a $1$ with a $4$ in
+the decimal notation of a number never changes its divisibility by $3$.
+
+It can be seen that $K$-equivalence is an equivalence relation
+(it is reflexive, symmetric and transitive).
+
+You are given a finite set $K$ in form of a union of disjoint finite intervals
+of positive integers.
+
+Your task is to find the equivalence classes of digits 1 to 9.
+
+\InputFile
+
+The first line contains $n$, the number of intervals composing the set $K$
+($1 \le n \le 10\,000$).
+
+Each of the next $n$ lines contains two positive integers $a_i$ and $b_i$ that
+describe the interval $[a_i, b_i]$
+(i. e. the set of positive integers between $a_i$ and $b_i$, inclusive), where
+$1 \le a_i \le b_i \le 10^{18}$. Also, for $i \in [2..n]$: $a_i \ge b_{i-1} + 2$.
+
+\OutputFile
+
+Represent each equivalence class as a concatenation of its elements,
+in ascending order.
+
+Output all the equivalence classes of digits 1 to 9, one at a line, sorted
+lexicographically.
+
+\Example
+
+\begin{example}
+	\exmp{
+1
+1 566
+}{
+1234
+5
+6
+789
+}%
+\exmp{
+1
+30 75
+}{
+12
+345
+6
+7
+89
+}%
+\end{example}
+
+\end{problem}

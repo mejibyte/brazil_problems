@@ -1,0 +1,34 @@
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage[english]{babel}
+\usepackage{olymp}
+%\usepackage{expdlist}
+%\usepackage{mfpic}
+%\usepackage{comment}
+
+% Treat all pictures as MPS (metapost) when using PDFLaTeX tool
+\ifx\pdftexversion\undefined
+\else
+  \DeclareGraphicsRule{*}{mps}{*}{}
+\fi
+
+\renewcommand{\contestname}{
+ACM ICPC 2009--2010, Northeastern European Regional Contest
+Practice Session\\
+St Petersburg -- Barnaul -- Tashkent -- Tbilisi, November 10, 2009
+}
+
+
+\renewcommand{\problemend}{\vspace{1cm}}
+\setcounter{problem}{23}
+
+\binoppenalty=10000
+\relpenalty=10000
+
+\begin{document}
+
+\input texts/xtra.tex
+\input texts/yield.tex
+\input texts/zero.tex
+
+\end{document}
