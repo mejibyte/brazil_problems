@@ -1,3 +1,10 @@
+// Solution to problem Conga Line
+//
+// Problem setter: Ana Echavarría
+// Intended solution: Greedy algorithm
+// Complexity: O(n) per test case
+//
+
 using namespace std;
 #include <algorithm>
 #include <iostream>
