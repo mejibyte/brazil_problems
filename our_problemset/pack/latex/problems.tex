@@ -1,0 +1,46 @@
+\documentclass[11pt,a4paper,oneside]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{olymp}
+\usepackage[dvips]{graphicx}
+\usepackage{color}
+\usepackage{colortbl}
+%\usepackage{expdlist}
+%\usepackage{mfpic}
+%\usepackage{comment}
+
+% Treat all pictures as MPS (metapost) when using PDFLaTeX tool
+%\ifx\pdftexversion\undefined
+%\else
+%  \DeclareGraphicsRule{*}{mps}{*}{}
+%\fi
+
+\renewcommand{\contestname}{
+Brazilian Training Camp, January - February 2012\\
+Unicamp, Campinas, São Paulo
+}    
+
+% Copied from 'amstex.tex' \bmod declaration
+\def\bdiv{\mskip-\medmuskip\mkern5mu\mathbin{\mathrm{div}}\mkern5mu\mskip-\medmuskip}
+% End of copied text
+
+\renewcommand{\t}{\texttt}
+
+\begin{document}
+
+\input texts/conga.tex
+\input texts/secret.tex
+\input texts/stones.tex
+% \input texts/asteroids.tex
+% \input texts/business.tex
+% \input texts/central.tex
+% \input texts/database.tex
+% \input texts/exclusive.tex
+% \input texts/funny.tex
+% \input texts/garbling.tex
+% \input texts/headshot.tex
+% \input texts/inspection.tex
+% \input texts/javacert.tex
+% \input texts/kequiv.tex
+
+\end{document}

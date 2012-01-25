@@ -1,0 +1,37 @@
+* First week - Andrey Lopatin
+** Monday, January 16
+
+Permutations, reverse permutation, inversion table, see a permutation as a chessboard with rooks in every column and row.
+
+** Tuesday, January 17
+
+Bipartite matching, finding a minimum vertex cover given a matching
+
+Josephus' Problem
+
+Linear Erathosthenes' sieve that also allows to decompose a number in primes
+
+
+** Wednesday, January 18
+** Thursday, January 19
+
+*** Games
+
+**** 1 player games
+
+1 player games are the easiest. Use DFS to find any path to win. Use BFS to find the shortest path to win.
+1 player games might be camouflaged under a 2 player game, for example if there are 2 players with a common
+objective and both do their moves trying to reach that objective, it can be thought as a single player moving
+on both sides.
+
+***** Common Trick: Reverse the graph
+
+If you are asked several times for the shortest path to win from different positions of the game,
+you can reverse the graph at the beginning and start a BFS from the nodes where the game usually ends. That way
+you don't have to run a BFS in the normal graph every time they ask for the shortest winning path from some node.
+
+**** Iterative deepening
+
+
+
+** Friday, January 20
