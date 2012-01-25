@@ -1,0 +1,110 @@
+// Andrés Mejía
+using namespace std;
+#include <algorithm>
+#include <iostream>
+#include <iterator>
+#include <numeric>
+#include <sstream>
+#include <fstream>
+#include <cassert>
+#include <climits>
+#include <cstdlib>
+#include <cstring>
+#include <string>
+#include <cstdio>
+#include <vector>
+#include <cmath>
+#include <queue>
+#include <deque>
+#include <stack>
+#include <list>
+#include <map>
+#include <set>
+
+////////////// Prewritten code follows. Look down for solution. ////////////////
+#define foreach(x, v) for (typeof (v).begin() x=(v).begin(); x !=(v).end(); ++x)
+#define For(i, a, b) for (int i=(a); i<(b); ++i)
+#define D(x) cout << #x " is " << (x) << endl
+
+const double EPS = 1e-9;
+int cmp(double x, double y = 0, double tol = EPS) {
+    return (x <= y + tol) ? (x + tol < y) ? -1 : 0 : 1;
+}
+////////////////////////// Solution starts below. //////////////////////////////
+
+int dp[105][105];
+int choice[105][105];
+
+int main(){
+    #ifndef LOCAL
+    #define problem_name "maxcon"
+    assert( freopen("maxcon.im", "r", stdin) != NULL);
+    assert( freopen("maxcom.out", "w", stdout) != NULL);
+    #endif
+    
+    string s, t;
+    cin >> s >> t;
+    s = " " + s;
+    t = " " + t;
+    
+    dp[0][0] = 1;
+    for (int i = 0; i < s.size(); ++i) {
+      for (int j = 0; j < t.size(); ++j) {
+	if (i == 0 and j == 0) continue;
+	
+	dp[i][j] = 0;
+	
+	if (i > 0 and j > 0 and s[i] == t[j]) {
+	  dp[i][j] = dp[i - 1][j - 1] + 1;
+	  choice[i][j] = 1;
+	}
+	
+	if (i > 0 and dp[i - 1][j] > dp[i][j]) {
+	  dp[i][j] = dp[i - 1][j];
+	  choice[i][j] = 2;
+	}
+	
+	if (j > 0 and dp[i][j - 1] > dp[i][j]) {
+	  dp[i][j] = dp[i][j - 1];
+	  choice[i][j] = 3;
+	}
+      }
+    }
+    
+    assert( dp[s.size() - 1][t.size() - 1] > 0 );
+    
+    printf("%d\n", dp[s.size() - 1][t.size() - 1] - 1);
+    
+    vector< int > a, b;
+    
+    for (int i = s.size() - 1, j = t.size() - 1; i > 0 or j > 0; ) {
+      if (choice[i][j] == 2) {
+	i--;
+      } else if (choice[i][j] == 3) {
+	j--;
+      } else {
+	a.push_back(i);
+	b.push_back(j);
+	i--;
+	j--;
+      }
+    }
+    reverse(a.begin(), a.end());
+    reverse(b.begin(), b.end());
+    
+    assert(a.size() == b.size());
+    for (int k = 0; k < a.size(); ++k) {
+      if (k > 0) printf(" ");
+      printf("%d", a[k]);
+    }
+    puts("");
+    
+    for (int k = 0; k < b.size(); ++k) {
+      if (k > 0) printf(" ");
+      printf("%d", b[k]);
+    }
+    puts("");
+    
+    return 0;
+}
+

@@ -1,0 +1,6 @@
+
+a = []
+262144.times do
+  a << 0
+end
+puts a.join(" ")

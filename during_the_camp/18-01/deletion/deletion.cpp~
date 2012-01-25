@@ -1,0 +1,182 @@
+// Andrés Mejía
+using namespace std;
+#include <algorithm>
+#include <iostream>
+#include <iterator>
+#include <numeric>
+#include <sstream>
+#include <fstream>
+#include <cassert>
+#include <climits>
+#include <cstdlib>
+#include <cstring>
+#include <string>
+#include <cstdio>
+#include <vector>
+#include <cmath>
+#include <queue>
+#include <deque>
+#include <stack>
+#include <list>
+#include <map>
+#include <set>
+
+////////////// Prewritten code follows. Look down for solution. ////////////////
+#define foreach(x, v) for (typeof (v).begin() x=(v).begin(); x !=(v).end(); ++x)
+#define For(i, a, b) for (int i=(a); i<(b); ++i)
+#define D(x) cout << #x " is " << (x) << endl
+
+const double EPS = 1e-9;
+int cmp(double x, double y = 0, double tol = EPS) {
+    return (x <= y + tol) ? (x + tol < y) ? -1 : 0 : 1;
+}
+////////////////////////// Solution starts below. //////////////////////////////
+
+#define null NULL
+
+struct Node {
+  int x, y, size;
+  Node *l, *r;
+  Node(int k) : x(k), y(rand()), size(1), l(null), r(null) { }
+};
+
+Node* relax(Node* p) {
+  if (p) {
+    p->size = 1;
+    if (p->l) p->size += p->l->size;
+    if (p->r) p->size += p->r->size;
+  }
+  return p;
+}
+
+void split(Node* t, int x, Node* &l, Node* &r) {
+  if (t == null) l = r = null; else {
+    if (x < t->x) {
+	split(t->l, x, l, t->l);
+	r = relax(t);
+    } else {
+	split(t->r, x, t->r, r);
+	l = relax(t);
+    }
+  }
+}
+
+Node* merge(Node* l, Node *r) {
+  if (l == null) return relax(r);
+  if (r == null) return relax(l);
+  if (l->y > r->y) {
+    l->r = merge(l->r, r);
+    return relax(l);
+  } else {
+    r->l = merge(l, r->l);
+    return relax(r);
+  }
+}
+
+Node* insert(Node* t, Node* m) {
+  if (t == null || m->y > t->y) {
+    split(t, m->x, m->l, m->r);
+    return relax(m);
+  }
+  if (m->x < t->x) t->l = insert(t->l, m);
+  else t->r = insert(t->r, m);
+  return relax(t);
+}
+
+Node* erase(Node* t, int x) {
+  if (t == null) return null;
+  printf("erasing x = %d at node with x=%d, y=%d\n", x, t->x, t->y);
+  if (t->x == x) {
+    Node *q = merge(t->l, t->r);
+    //delete t;
+    return relax(q);
+  } else {
+    if (x < t->x) t->l = erase(t->l, x);
+    else t->r = erase(t->r, x);
+    return relax(t);
+  }
+}
+
+Node* find(Node* cur, int x) {
+  while (cur != null and cur->x != x) {
+    if (x < cur->x) cur = cur->l;
+    else cur = cur->r;
+  }
+  return cur;
+}
+
+void print(Node *p) {
+  if (p == null) return;
+  print(p->l);
+  printf("x = %d, y = %d, size = %d\n", p->x, p->y, p->size);
+  print(p->r);
+}
+
+Node* find_kth(Node *p, int k) {
+  if (p == null) return null;
+  int left = p->l ? p->l->size : 0;
+  int right = p->r ? p->r->size : 0;
+  if (left == k - 1) return p;
+  if (left >= k) return find_kth(p->l, k);
+  return find_kth(p->r, k - left - 1);
+}
+
+int ans[5000005];
+
+int main(){
+    #ifndef LOCAL
+    #define problem_name "deletion"
+    assert( freopen(problem_name ".in", "r", stdin) != NULL);
+    assert( freopen(problem_name ".out", "w", stdout) != NULL);
+    #endif
+    srand(76540123);
+    
+    int n, k, l;
+    scanf("%d %d %d", &n, &k, &l);
+    
+    Node * root = new Node(1);
+    
+    for (int i = 2; i <= n; ++i) {
+      root = insert(root, new Node(i));
+      //printf("After inserting i = %d tree is:\n", i);
+      //print(root);
+    }
+    
+//     for (int i = 1; i <= n; ++i) {
+//       Node * p = find_kth(root, i);
+//       printf("%d-th: ", i);
+//       if (!p) puts("null");
+//       else printf("%d\n", p->x);
+//     }
+
+
+    int remain = n;
+    for (int time = 1; remain > 0 and remain >= k; ) {
+      vector< int > to_delete;
+      
+      for (int i = 1; i * k <= remain; ++i) {
+	Node * who = find_kth(root, i * k);
+	assert(who);
+	assert(ans[who->x] == 0);
+	ans[who->x] = time;
+	//printf("i*k = %d, x = %d\n", i*k, who->x);
+	to_delete.push_back( who-> x );
+	time++;
+      }
+      
+      for (int k = 0; k < to_delete.size(); ++k) {
+	//printf("will delete %d:\n", to_delete[k]);
+	root = erase(root, to_delete[k]);
+	remain--;
+      }
+    }
+    
+    for (int i = 0; i < l; ++i) {
+      int x; scanf("%d", &x);
+      printf("%d\n", ans[x]);
+    }
+    
+    return 0;
+}
+
+
