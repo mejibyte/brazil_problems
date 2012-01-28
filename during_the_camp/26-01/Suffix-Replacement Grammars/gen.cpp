@@ -31,7 +31,22 @@ int cmp(double x, double y = 0, double tol = EPS) {
 }
 ////////////////////////// Solution starts below. //////////////////////////////
 
+map<string, string> g;
+
+string randomS(int len) {
+    string ans = "";
+    for (int i = 0; i < len; ++i){
+        ans += char(rand() % 1 + 'a');
+    }
+    return ans;
+}
+
 int main(){
-    D(2* 3 * 7 *4 * 5 / __gcd(2,__gcd(3, __gcd(7, __gcd(4, 5)))) );
+    cout << randomS(20) << " "  << randomS(20) << " " << 100 << endl;
+    for (int i = 0; i < 100; ++i) {
+        int len = rand() % 20 + 1;
+        cout << randomS(len) << " " << randomS(len) << endl;
+    }
+    cout << ".";
     return 0;
 }

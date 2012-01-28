@@ -31,46 +31,22 @@ int cmp(double x, double y = 0, double tol = EPS) {
 }
 ////////////////////////// Solution starts below. //////////////////////////////
 
-const int oo = (1 << 30);
-const int MAXN = 5000005;
-
-int P[MAXN];
-int T[MAXN];
-int C[MAXN]; // Count of eliminated in each round
-
 int main(){
+    string problemName = "waiter";  
     #ifndef LOCAL
-        freopen("deletion.in", "r", stdin);
-        freopen("deletion.out", "w", stdout);
+        freopen((problemName + ".in").c_str(), "r", stdin);
+        freopen((problemName + ".out").c_str(), "w", stdout);
     #endif
     
-    int n, k, l;
-    scanf("%d %d %d", &n, &k, &l);
-    
-    for (int x = 0; x <= n; ++x) {
-        if (x < k) {
-            P[x] = T[x] = oo;
-        } else {
-            P[x] = x % k == 0 ? 1 : P[x - x / k] + 1;
-            T[x] = x % k == 0 ? x / k : T[x - x / k];
+    int total, percent, money;
+    scanf("%d %d %d", &total, &percent, &money);
+    for (int tip = money; tip >= 0; --tip) {
+        int v = total + (total * percent) / 100 + (total * tip) / 100;
+        if (v <= money) {
+            printf("%d\n", tip);
+            return 0;
         }
-        
-        if (P[x] < oo) C[P[x]]++;
     }
-    for (int x = n, i = 1; x >= k; i++) {
-        assert( C[i] == x / k );
-        x = x - x / k;
-    }
-    
-    for (int i = 1; i <= n; ++i) {
-       C[i] += C[i - 1];
-    }
-    
-    for (int q = 0; q < l; ++q) {
-        int x; scanf("%d", &x);
-        if (x < k) printf("0\n");
-        else printf("%d\n", T[x] + C[P[x] - 1]);
-    }
-    
+    printf("-1");
     return 0;
 }

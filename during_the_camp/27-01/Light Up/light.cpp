@@ -31,7 +31,9 @@ int cmp(double x, double y = 0, double tol = EPS) {
 }
 ////////////////////////// Solution starts below. //////////////////////////////
 
+int rows, cols;
+
 int main(){
-    D(2* 3 * 7 *4 * 5 / __gcd(2,__gcd(3, __gcd(7, __gcd(4, 5)))) );
+     
     return 0;
 }

@@ -1,0 +1,19 @@
+AA BB 4
+A B
+AB BA
+AA CC
+CC BB
+A B 3
+A C
+B C
+c B
+A B 3
+A C
+B C
+C B
+abcdefghijklmnopqrst abcdefghijklmnopqrsz 1
+t z
+A C 2
+A C
+A B
+.
