@@ -1,3 +1,4 @@
+// Accepted
 using namespace std;
 #include <algorithm>
 #include <iostream>
@@ -75,12 +76,13 @@ void calculate(vector< int > G[MAXN], vector< int > R[MAXN], int n, int grundy[M
                 if (dist[u] % 2 == 0) { // normal BFS. 
                     //v can't have the same grundy number as u (which is K), because there's an edge from v to u in the original graph.
                     
-                    if (grundy[v] != -1 and grundy[v] != oo) continue;                    
+                    if (grundy[v] != -1 and grundy[v] != oo) continue;
                     dist[v] = dist[u] + 1;
                     q.push( v );
                 } else {
                     //v might have grundy number K, as long as we are sure that there are no edges to bigger grundy numbers.
-                    if (grundy[v] != -1) continue;   
+                    
+                    if (grundy[v] != -1) continue;
                     if (--count[v] == 0) {
                         dist[v] = dist[u] + 1;
                         q.push( v );
@@ -112,9 +114,9 @@ void calculate(vector< int > G[MAXN], vector< int > R[MAXN], int n, int grundy[M
         assert( grundy[i] != -1 );
     }
    // printf("grundy numbers are:\n");
-//    for (int i = 0; i < n; ++i) {
-//        printf("grundy[%d] = %d\n", i + 1, grundy[i]);
-//    }
+   // for (int i = 0; i < n; ++i) {
+   //     printf("grundy[%d] = %d\n", i + 1, grundy[i]);
+   // }
 }
 
 bool hasGrundy(int u, vector<int> G[MAXN], int grundy[MAXN], int which) {
@@ -162,7 +164,7 @@ int main(){
         }
         
         if (g0 != oo and g1 != oo) {
-            puts(g0 ^ g1 == 0 ? "second" : "first");
+            puts((g0 ^ g1) == 0 ? "second" : "first");
             continue;
         }
         

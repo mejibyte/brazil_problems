@@ -1,3 +1,5 @@
+// Wrong Answer on test 9
+// Andrés Mejía
 using namespace std;
 #include <algorithm>
 #include <iostream>
@@ -44,6 +46,7 @@ void calculate(vector< int > G[MAXN], vector< int > R[MAXN], int n, int grundy[M
     static int dist[MAXN];
     
     for (int i = 0; i < n; ++i) {
+        count[i] = G[i].size();
         grundy[i] = -1;
     }
     
@@ -57,7 +60,7 @@ void calculate(vector< int > G[MAXN], vector< int > R[MAXN], int n, int grundy[M
             count[i] = 0;
             for (int e = 0; e < G[i].size(); ++e) {
                 int v = G[i][e];
-                count[i] += (grundy[v] == -1 or grundy[v] > k);  // infinity is the only value > k at this point
+                count[i] += (grundy[v] == -1 or grundy[v] > k);
             }
             if (count[i] == 0 and grundy[i] == -1) {
                 dist[i] = 0;
@@ -75,13 +78,15 @@ void calculate(vector< int > G[MAXN], vector< int > R[MAXN], int n, int grundy[M
                 if (dist[u] % 2 == 0) { // normal BFS. 
                     //v can't have the same grundy number as u (which is K), because there's an edge from v to u in the original graph.
                     
-                    if (grundy[v] != -1 and grundy[v] != oo) continue;                    
+                    // for even positions, ignore marked and infinities
+                    if (grundy[v] != -1) continue;
                     dist[v] = dist[u] + 1;
                     q.push( v );
                 } else {
                     //v might have grundy number K, as long as we are sure that there are no edges to bigger grundy numbers.
                     
-                    if (grundy[v] != -1) continue;   
+                    // for odd positions, ignored marked with anything else than infinity
+                    if (grundy[v] != -1 and grundy[v] != oo) continue;
                     if (--count[v] == 0) {
                         dist[v] = dist[u] + 1;
                         q.push( v );
@@ -90,8 +95,9 @@ void calculate(vector< int > G[MAXN], vector< int > R[MAXN], int n, int grundy[M
             }
         }
         
+        
         for (int i = 0; i < n; ++i) {
-            if (dist[i] != -1 and dist[i] % 2 == 0) {
+            if (dist[i] % 2 == 0) {
                 assert( grundy[i] == -1 );
                 grundy[i] = k;
                 changed = true;
@@ -108,24 +114,26 @@ void calculate(vector< int > G[MAXN], vector< int > R[MAXN], int n, int grundy[M
             }
             if (!has) grundy[i] = oo;
         }
-    }    
-    
-    printf("grundy numbers are:\n");
-    for (int i = 0; i < n; ++i) {
-        printf("grundy[%d] = %d\n", i + 1, grundy[i]);
     }
+    // printf("grundy numbers are:\n");
+    // for (int i = 0; i < n; ++i) {
+    //     printf("grundy[%d] = %d\n", i + 1, grundy[i]);
+    // }
 }
 
-// g - value of the other non-infinity game
-// u - node with grundy[u] == oo
-bool canWinWithInfinity(int g,   int u, vector< int > G[MAXN], int grundy[MAXN]) {
+int sumInfinity(int g,   int u, vector< int > G[MAXN], int grundy[MAXN]) {
+    vector< int > options; // options from infinity
     for (int e = 0; e < G[u].size(); ++e) {
         int v = G[u][e];
         assert( grundy[v] != -1 );
         if (grundy[v] == oo) continue;
-        if (grundy[v] ^ g == 0) return true;
+        options.push_back( grundy[v] );
     }
-    return false;
+    if (options.size() == 0) return g;
+    for (int k = 0; k < options.size(); ++k) {
+        if (g ^ options[k] == 0) return 1; // win
+    }
+    return 0;
 }
 
 int main(){
@@ -157,7 +165,6 @@ int main(){
         u0--, u1--;
         
         int g0 = grundy[0][u0], g1 = grundy[1][u1];
-        assert(g0 != -1 and g1 != -1);
         
         if (g0 == oo and g1 == oo) {
             puts("draw");
@@ -170,11 +177,11 @@ int main(){
         }
         
         if (g0 == oo) { assert(g1 != oo);
-            bool ans = canWinWithInfinity(g1, u0, G[0], grundy[0]);
-            puts(ans ? "first" : "draw");
+            int ans = sumInfinity(g1, u0, G[0], grundy[0]);
+            puts(ans == 0 ? "second" : "first");
         } else { assert(g0 != oo and g1 == oo);
-            bool ans = canWinWithInfinity(g0, u1, G[1], grundy[1]);
-            puts(ans ? "first" : "draw");
+            int ans = sumInfinity(g0, u1, G[1], grundy[0]);
+            puts(ans == 0 ? "second" : "first");
         }
     }
     return 0;
