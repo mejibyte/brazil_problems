@@ -1,7 +1,91 @@
 * First week - Andrey Lopatin
 ** Monday, January 16
 
-Permutations, reverse permutation, inversion table, see a permutation as a chessboard with rooks in every column and row.
+During the morning we had a warmup contest with easy problems. This was done mostly to test the 
+judging server at http://acm.spbgu.ru/tsweb.
+
+During the afternoon, we had a contest with 26 problems titled "The Blitz Kontest".
+
+After the contest I asked Lopatin to explain me problem I - Reversing Inversions, because I didn't understand the problem
+statement.
+
+The statement talks about an inversion table for a permutation. In the statement, an inversion table is defined as follows:
+For each element P[k] of the permutation P, count how many elements to the left of P[k] are greater than P[k], and save that
+number at position P[k] of the inversion table.
+
+For example, for the permutation 2 7 3 6 5 1 4, the inversion table looks as follows:
+
+1 2 3 4 5 6 7
+-------------
+5 0 1 3 2 1 0
+
+At position 1, we have 5 because there are five elements greater than 1 that are to the left of 1 in the original permutation.
+At position 2, we have 0 because two is the first element in the permutation and so there can't be a greater element
+to its left.
+At position 3, we have 1 because 7 is the only element greater than 3 that appears to the left of 3.
+At position 4 we have 3 because only 7, 6 and 5 are greater than 4 and are to the left of it in the original permutation,
+and so on.
+
+In this problem, you are given an inversion table (the inversion table above is the one in the sample input) and you are
+asked to compute the inversion table for the inverse permutation. At this point I asked Lopatin what the inverse permutation
+is. He told me that a permutation can be thought of as instructions to reorder a list of elements, by moving the element
+that is at position k to position P[k]. When thought this way, the reverse permutation is another permutation that moves
+the elements back into the original order.
+
+An easy way to compute the inverse permutation on paper is to swap the roles of position and values. For example, let's find
+the inverse permutation for the permutation above:
+
+position  1 2 3 4 5 6 7  
+--------|--------------
+value     2 7 3 6 5 1 4
+
+If we swap position and value we get:
+
+value     1 2 3 4 5 6 7  
+--------|--------------
+position  2 7 3 6 5 1 4
+
+This says that 1 should go into position 2 of the inverse permutation, 2 should go into position 7 and so on. After
+reordering accordingly we get:
+
+position  1 2 3 4 5 6 7  
+--------|--------------
+value     6 1 3 7 5 4 2
+
+There's also a special permutation called the identity permutation, which is just 1 2 3 4 5 ... N. The strict definition
+of the inverse permutation is a new permutation that when chained with the old one gives the identity (This makes sense,
+if you apply a permutation and then apply its inverse you get the elements back in the original order, which is just like
+if you had applied a permutation that doesn't reorder anything at all -- this permutation that doesn't reorder anything
+at all is the identity because it moves element 1 to position 1, element 2 to position 2, etc).
+
+If we call the original permutation A and the inverse B, this means that:
+
+B[A[i]] = i
+
+For example, with the two permutations above we have A[1] = 2, so B[A[1]] = B[2] = 1. A[2] = 7, so B[A[2]] = B[7] = 2.
+A[3] = 3, so B[A[3]] = B[3] = 3, and so on.
+
+This translates into a straightforward algorithm to find the inverse permutation (here I'm using 0-based indexes, 
+but on the permutations above I was using 1-based indexes):
+
+for (int i = 0; i < n; ++i) {
+    inverse_permutation[ permutation[i] ] = i;
+}
+
+Another interesting thing that Lopatin mentioned is that a permutation can be neatly visualized in a chessboard.
+For each element P[k] of the permutation, put a rook at row k and column P[k] (and then finding the inverse
+is just imaginarily swapping the meaning of rows and columns in this chessboard). Since this is a permutation, no
+two rooks will attack each other. The nice thing about this visualization is that it allows to think differently about
+problems with permutations (for example, counting greater elements to the left of some element is just counting how
+ many points lie inside a particular rectangle of the chessboard).
+
+So problem I can be solved with this knowledge in O(n^2): First get the original permutation from the inversion table given
+in the input, then find its inverse and finally find the inversion table for this new permutation. At the end I solved this
+problem and Lopatin congratulated me.
+
+He also mentioned there was a O(n log n) solution using a segment tree. This harder problem appeared on next day's contest
+and I solved it during the competition :)
+
 
 ** Tuesday, January 17
 
@@ -35,3 +119,7 @@ you don't have to run a BFS in the normal graph every time they ask for the shor
 
 
 ** Friday, January 20
+
+** Saturday, January 21
+
+** Sunday, January 22
