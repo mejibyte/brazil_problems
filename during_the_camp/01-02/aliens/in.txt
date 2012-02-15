@@ -1,0 +1,17 @@
+3
+baaaababababbababbab
+11
+baaaababababbababbab
+3
+cccccc
+1
+aa
+100
+b
+3
+aaabbb
+3
+aaabbb
+2
+aaaa
+0
