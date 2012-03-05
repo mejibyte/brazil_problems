@@ -97,6 +97,13 @@ Linear Erathosthenes' sieve that also allows to decompose a number in primes
 
 
 ** Wednesday, January 18
+
+Problem 17D - Martian King: 
+    Explanation in http://www.livestream.com/escoladeverao2012/video?clipId=pla_ad34871f-5c59-4527-9d09-0fd1c7d525ad
+    Minute 5:32.
+
+Treaps or Cartesian Trees and Ropes
+
 ** Thursday, January 19
 
 *** Games
@@ -118,8 +125,20 @@ you don't have to run a BFS in the normal graph every time they ask for the shor
 
 
 
+Problem 18F - Permutations Strike Back
+   Explanation in http://www.livestream.com/escoladeverao2012/video?clipId=pla_4429a519-7f52-4a57-b0fd-8fd991f0a68e
+   Minute 00:35
+
 ** Friday, January 20
+   
+Problem 17H - Primes in a sequence
+   Explanation in http://www.livestream.com/escoladeverao2012/video?clipId=pla_5adbc557-8ac0-447c-aaa0-6eeff700b21c
+   Minute 22:05
+
+Problem 16bN - Nearest Approximation
+   Minute 30:54
 
 ** Saturday, January 21
 
 ** Sunday, January 22
+   
